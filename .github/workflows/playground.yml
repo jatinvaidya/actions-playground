@@ -28,7 +28,7 @@ jobs:
       - name: log info
         run: | 
           echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-          echo "🔎 Repository is ${{ github.repository }} and branch is {{ github.event.pull_request.head.ref }}"
+          echo "🔎 Repository is ${{ github.repository }} and branch is {{ github.base_ref }}"
           
       - name: Dump GitHub context
         env:
@@ -38,6 +38,7 @@ jobs:
       - name: check which GH environment was picked
         env:
           URL: ${{ secrets.URL }}
+          XYZ: ${{ secrets.XYZ }}
         run: echo $URL
       
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
