@@ -1,1 +1,1 @@
-this is body for baz.txt
+this is body for baz.txt (changed from feature/f1)
