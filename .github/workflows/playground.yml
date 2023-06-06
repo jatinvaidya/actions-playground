@@ -5,6 +5,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "env/dev" branch
   pull_request:
+    types: [closed]
     branches: [ "env-dev", "env-tst", "env-prd" ]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -26,7 +27,13 @@ jobs:
       - name: log info
         run: | 
           echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-          echo "🔎 Repository is ${{ github.repository }} and branch is ${{ github.ref }}"
+          echo "🔎 Repository is ${{ github.repository }} and branch is {{ github.event.pull_request.head.ref }}"
+          
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+        
       - name: check which GH environment was picked    
         run: echo $URL
       
