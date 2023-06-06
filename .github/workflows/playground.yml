@@ -20,7 +20,7 @@ jobs:
     
     # Environment variables
     environment:
-      name: ${{ github.ref }}
+      name: ${{ github.base_ref }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
