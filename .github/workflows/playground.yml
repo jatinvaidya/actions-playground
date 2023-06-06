@@ -20,6 +20,7 @@ jobs:
     
     # Environment variables
     environment:
+      # set github environment (collection of secrets) according to the branch
       name: ${{ github.base_ref }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
