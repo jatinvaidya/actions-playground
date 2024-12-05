@@ -40,7 +40,6 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
-            const { context, github } = require('@actions/github');
             const { owner, repo } = context.repo;
 
             await github.issues.create({
