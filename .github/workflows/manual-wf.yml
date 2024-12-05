@@ -35,3 +35,18 @@ jobs:
           echo "🎉 This workflow was automatically triggered by a ${{ github.event_name }} event."
           echo "🔎 Repository is ${{ github.repository }} and branch is ${{ env.GIT_BRANCH_NAME }}"
           echo "🔎 FOO is ${{ env.FOO }}"
+
+      - name: Create Approval Issue
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const { context, github } = require('@actions/github');
+            const { owner, repo } = context.repo;
+
+            await github.issues.create({
+              owner,
+              repo,
+              title: 'Manual Approval Required',
+              body: 'Please approve this workflow to proceed with Terraform Apply.',
+              labels: ['approval']
+            });
