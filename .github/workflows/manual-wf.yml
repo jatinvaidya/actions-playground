@@ -1,16 +1,7 @@
 # Trigger the workflow on manual dispatch (not automatically)
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        description: "Environment to deploy to"
-        required: true
-        default: "development"
-        options:
-          - env-dev
-          - env-tst
-          - env-prd
-
+      
 # Permissions to read the contents of the repository
 permissions:
   contents: read
@@ -22,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FOO: ${{ vars.FOO }}
-      GIT_BRANCH_NAME: ${{ github.base_ref }}
+      GIT_BRANCH_NAME: ${{ github.ref }}
 
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
