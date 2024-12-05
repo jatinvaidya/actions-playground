@@ -1,0 +1,38 @@
+# Trigger the workflow on manual dispatch (not automatically)
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy to"
+        required: true
+        default: "development"
+        options:
+          - env-dev
+          - env-tst
+          - env-prd
+
+# Permissions to read the contents of the repository
+permissions:
+  contents: read
+
+# Define the jobs that the workflow will run
+jobs:
+  manual-wf:
+    name: "manual-wf"
+    runs-on: ubuntu-latest
+    env:
+      FOO: ${{ vars.FOO }}
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    # Define the steps that the job will run
+    steps:
+      # Log preliminary info
+      - name: Log preliminary info
+        run: |
+          echo "🎉 This workflow was automatically triggered by a ${{ github.event_name }} event."
+          echo "🔎 Repository is ${{ github.repository }} and branch is ${{ env.GIT_BRANCH_NAME }}"
+          echo "🔎 FOO is ${{ env.FOO }}"
