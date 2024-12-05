@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FOO: ${{ vars.FOO }}
-      GIT_BRANCH_NAME: ${{ github.ref }}
+      GIT_REF: ${{ github.ref }}
 
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -23,9 +23,17 @@ jobs:
 
     # Define the steps that the job will run
     steps:
+      - name: Extract branch name
+        id: extract_branch
+        run: |
+          GIT_BRANCH_NAME=${{ env.GIT_REF }}
+          GIT_BRANCH_NAME=${GIT_BRANCH_NAME#refs/heads/}
+          echo "GIT_BRANCH_NAME=${GIT_BRANCH_NAME} >> $GITHUB_ENV
+        
       # Log preliminary info
       - name: Log preliminary info
         run: |
+          GIT_BRANCH_NAME=${{env.GIT_REF}}
           echo "🎉 This workflow was automatically triggered by a ${{ github.event_name }} event."
           echo "🔎 Repository is ${{ github.repository }} and branch is ${{ env.GIT_BRANCH_NAME }}"
           echo "🔎 FOO is ${{ env.FOO }}"
