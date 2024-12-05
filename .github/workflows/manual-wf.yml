@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FOO: ${{ vars.FOO }}
+      GIT_BRANCH_NAME: ${{ github.base_ref }}
+
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
