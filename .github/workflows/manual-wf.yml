@@ -28,7 +28,7 @@ jobs:
         run: |
           GIT_BRANCH_NAME=${{ env.GIT_REF }}
           GIT_BRANCH_NAME=${GIT_BRANCH_NAME#refs/heads/}
-          echo "GIT_BRANCH_NAME=${GIT_BRANCH_NAME} >> $GITHUB_ENV
+          echo "GIT_BRANCH_NAME=${GIT_BRANCH_NAME}" >> $GITHUB_ENV
         
       # Log preliminary info
       - name: Log preliminary info
